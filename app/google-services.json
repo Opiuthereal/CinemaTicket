@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1048611920541",
+    "project_id": "cinematicketandroidstudio",
+    "storage_bucket": "cinematicketandroidstudio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048611920541:android:e6d3f63013ec61ab3a9274",
+        "android_client_info": {
+          "package_name": "com.example.cinematicketandroidstudio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWOIh5cI4r1bzDSWL7AWFdz7pKFU5TZYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048611920541:android:60ed2f3c424593f43a9274",
+        "android_client_info": {
+          "package_name": "com.example.recyclerviewdemo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWOIh5cI4r1bzDSWL7AWFdz7pKFU5TZYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

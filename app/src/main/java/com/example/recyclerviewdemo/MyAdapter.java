@@ -1,22 +1,27 @@
 package com.example.recyclerviewdemo;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private Context context;
-    private List<Film> films;
+    private List<FilmRecyclerView> films;
 
-    public MyAdapter(Context context, List<Film> films) {
+    public MyAdapter(Context context, List<FilmRecyclerView> films) {
         this.context = context;
         this.films = films;
     }
@@ -30,8 +35,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        // Nous associons les données du film au ViewHolder
-        Film currentFilm = films.get(position);
+        FilmRecyclerView currentFilm = films.get(position);
+
         holder.imageView.setImageResource(currentFilm.getImageResId());
         holder.ageRestriction.setImageResource(currentFilm.getAgeRequis());
         holder.titreView.setText(currentFilm.getTitre());
@@ -43,11 +48,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.vost2.setText(currentFilm.getVost2());
         holder.vost3.setText(currentFilm.getVost3());
         holder.vost4.setText(currentFilm.getVost4());
+
+        holder.imageView.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Intent intent = new Intent(context, FilmDetail.class);
+            intent.putExtra("titreModifié", currentFilm.getTitre());
+            intent.putExtra("imageResId", currentFilm.getImageResId());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
         // Retourne le nombre d'éléments dans la liste des films
         return films.size();
     }
+
 }

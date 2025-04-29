@@ -7,8 +7,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
+
 public class MyViewHolder extends RecyclerView.ViewHolder {
 
+    public BreakIterator titreTextView;
     // Déclaration des vues
     ImageView imageView, ageRestriction;
     TextView titreView, horaire1View, horaire2View, horaire3View, horaire4View, vost1, vost2, vost3, vost4;
