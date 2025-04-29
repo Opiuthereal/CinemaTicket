@@ -80,10 +80,6 @@ public class FilmDetail extends AppCompatActivity {
         final ImageView imageFilmAvantVideo = findViewById(R.id.ImageFilmAvantVideo);
         final VideoView videoViewBandeAnnonce = findViewById(R.id.videoViewBandeAnnonce);
 
-        // Associer une image du drawable à l'ImageView
-        //imageFilmAvantVideo.setImageResource(R.drawable.montecristoback);  // film_image est le nom de ton image dans drawable
-
-        // Mettre un OnClickListener sur l'image
         imageFilmAvantVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,11 +95,11 @@ public class FilmDetail extends AppCompatActivity {
         });
 
 
-        TextView titreTextView = findViewById(R.id.titre); // l'id doit correspondre à ton layout
+        TextView titreTextView = findViewById(R.id.titre);
         ImageView imageView = findViewById(R.id.ImageFilmAvantVideo);
 
 
-        // Récupération du titre
+        // Récupération du titre et de l'image de film
         Intent intent = getIntent();
         String titre = intent.getStringExtra("titreModifié");
         int imageResId = intent.getIntExtra("imageResId", -1);
@@ -115,7 +111,7 @@ public class FilmDetail extends AppCompatActivity {
             titreTextView.setText("Titre introuvable");
         }
 
-        // Affichage de l'image si elle existe
+        // Affichage de la bonne image si elle existe
         if (imageResId != -1) {
             imageView.setImageResource(imageResId);
         } else {
