@@ -1,0 +1,163 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="12dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FF000000"/>
+
+    <!-- Image en arrière-plan -->
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground"
+        android:alpha="0.6"
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp">
+
+        <!-- Titre -->
+        <TextView
+            android:id="@+id/titre"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Titre"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <!-- Age Restriction -->
+        <ImageView
+            android:id="@+id/ageRestriction"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="14dp"
+            android:scaleType="centerCrop"
+            android:layout_toEndOf="@id/titre"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="20dp"
+        >
+
+        <!-- Heure 1 -->
+        <TextView
+            android:id="@+id/heure1"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14:00"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="20dp"
+            />
+
+        <TextView
+            android:id="@+id/vostHeure1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOST"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/heure1"
+            android:layout_alignStart="@id/heure1"
+            android:textSize="13dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <!-- Heure 2 -->
+        <TextView
+            android:id="@+id/heure2"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16:30"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/heure1"
+            />
+
+        <TextView
+            android:id="@+id/vostHeure2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOST"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/heure2"
+            android:layout_alignStart="@id/heure2"
+            android:textSize="13dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <!-- Heure 3 -->
+        <TextView
+            android:id="@+id/heure3"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="19:00"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/heure2"
+            />
+
+        <TextView
+            android:id="@+id/vostHeure3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOST"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/heure3"
+            android:layout_alignStart="@id/heure3"
+            android:textSize="13dp"
+            android:layout_marginEnd="20dp"
+            />
+
+        <!-- Heure 4 -->
+        <TextView
+            android:id="@+id/heure4"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21:45"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@id/heure3"
+            />
+
+        <TextView
+            android:id="@+id/vostHeure4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VOST"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/heure4"
+            android:layout_alignStart="@id/heure4"
+            android:textSize="13dp"
+            android:layout_marginEnd="20dp"
+            />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,121 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Rechercher">
+
+        </EditText>
+
+        <Spinner
+            android:id="@+id/spinnerCinema"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </Spinner>
+
+        <!-- Pathé -->
+        <TextView
+            android:id="@+id/nomCinema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pathé Wepler"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/nomCinema2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pathé Palace"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+
+        <!--UGC-->
+
+        <TextView
+            android:id="@+id/nomCinema3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UGC La Villette"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/nomCinema4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UGC Opéra"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <!--Gaumont-->
+
+        <TextView
+            android:id="@+id/nomCinema5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gaumont Saint-Denis"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/nomCinema6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gaumont Boulogne Billancourt"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+</ScrollView>
