@@ -2,6 +2,8 @@ package com.example.recyclerviewdemo;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +18,9 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.google.android.material.imageview.ShapeableImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilmDetail extends AppCompatActivity {
 
@@ -119,6 +124,22 @@ public class FilmDetail extends AppCompatActivity {
             imageView.setImageResource(R.drawable.ic_launcher_foreground);  // Par exemple, une image par défaut
         }
 
+
+        //ici la partie recyclerView pour les horaires de film
+        RecyclerView recyclerViewHoraire = findViewById(R.id.recyclerViewHoraire);
+
+        List<ItemHoraire> itemsHoraires = new ArrayList<>();
+        itemsHoraires.add(new ItemHoraire("12:00", "VOST"));
+        itemsHoraires.add(new ItemHoraire("14:00", "VF"));
+        itemsHoraires.add(new ItemHoraire("15:30", "VO"));
+        itemsHoraires.add(new ItemHoraire("17:00", "VF"));
+        itemsHoraires.add(new ItemHoraire("19:45", "VF"));
+
+        // pour scroll de manière horizontale
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewHoraire.setLayoutManager(layoutManager); // applique le layout horizontal
+
+        recyclerViewHoraire.setAdapter(new MyAdapterHoraire(getApplicationContext(), itemsHoraires));
 
 
         //ViewCompat A METTRE ici avec id = Main2

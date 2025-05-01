@@ -1,0 +1,31 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:elevation="10dp"
+    android:background="@android:color/white"
+    android:layout_margin="12dp"
+    android:paddingStart="15dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/horaire1Film"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="14:00"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/vostHoraire1Film"
+        android:text="VF"
+        android:layout_marginLeft="5dp"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
