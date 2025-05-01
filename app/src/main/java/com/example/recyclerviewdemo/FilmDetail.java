@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -22,7 +23,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilmDetail extends AppCompatActivity {
+public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,8 @@ public class FilmDetail extends AppCompatActivity {
 
         //controles de son de la vidéo
         AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-        audioManager.requestAudioFocus(focusChange -> {}, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+        audioManager.requestAudioFocus(focusChange -> {
+        }, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
         videoView.setOnPreparedListener(mp -> {
             mp.setVolume(1f, 1f); // Son activé
@@ -135,13 +137,50 @@ public class FilmDetail extends AppCompatActivity {
         itemsHoraires.add(new ItemHoraire("17:00", "VF"));
         itemsHoraires.add(new ItemHoraire("19:45", "VF"));
 
-        // pour scroll de manière horizontale
+        // Configuration du RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewHoraire.setLayoutManager(layoutManager); // applique le layout horizontal
+        recyclerViewHoraire.setLayoutManager(layoutManager);
 
-        recyclerViewHoraire.setAdapter(new MyAdapterHoraire(getApplicationContext(), itemsHoraires));
+        // Créer l'adapter avec le listener et définir l'adapter pour le RecyclerView
+        MyAdapterHoraire adapter = new MyAdapterHoraire(this, itemsHoraires, this);
 
+        recyclerViewHoraire.setAdapter(adapter);
 
-        //ViewCompat A METTRE ici avec id = Main2
+        // Fragment de réservation de tickets
+        FragmentTicketReservation fragment = new FragmentTicketReservation();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentTicketReservation, fragment)
+                .commit();
     }
+
+    // Fonction déclenchée lorsqu’un horaire est cliqué
+    public void onItemClick(ItemHoraire itemHoraire) {
+        Log.d("FilmDetail", "Item clicked: " + itemHoraire.getHoraireFilm());
+
+        FrameLayout fragmentContainer = findViewById(R.id.fragmentTicketReservation);
+        fragmentContainer.setVisibility(View.VISIBLE);
+
+
+        // Créer une instance du fragment et passer les arguments
+        FragmentTicketReservation fragment = new FragmentTicketReservation();
+        Bundle args = new Bundle();
+        args.putString("horaire", itemHoraire.getHoraireFilm());  // Passer l'horaire sélectionné
+        fragment.setArguments(args);
+
+        // Afficher le fragment dans le conteneur, avec retour possible grâce à addToBackStack
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.fragmentTicketReservation, fragment)
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+
+    //ViewCompat A METTRE ici avec id = Main2
+
 }
+
+
+

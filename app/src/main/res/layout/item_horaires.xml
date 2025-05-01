@@ -4,7 +4,7 @@
     android:layout_height="100dp"
     android:orientation="vertical"
     android:elevation="10dp"
-    android:background="@android:color/white"
+    android:background="@drawable/rounded_item_horaire"
     android:layout_margin="12dp"
     android:paddingStart="15dp"
     android:paddingTop="10dp">
