@@ -1,20 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActivityTarif">
 
-    <TextView
-        android:id="@+id/legende"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TARFI PAGE BANDE DE BOLOSS"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="3dp" />
+        android:padding="16dp">
 
-</RelativeLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/croix_image_tarif"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/croix_retour"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/prenezVotreTarifTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Séléctionnez vos tarifs"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintTop_toTopOf="@id/croix_image_tarif"
+            app:layout_constraintBottom_toBottomOf="@id/croix_image_tarif"
+            app:layout_constraintStart_toEndOf="@id/croix_image_tarif"
+            android:layout_marginStart="32dp"/>
+
+        <TextView
+            android:id="@+id/tarifEnfantTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Tarif enfant"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toBottomOf="@id/croix_image_tarif"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/tarifEnfantValeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="8"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifEnfantTxt"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/plusTarifEnfant"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus_jaune"
+            app:layout_constraintTop_toTopOf="@id/tarifEnfantValeur"
+            app:layout_constraintBottom_toBottomOf="@id/tarifEnfantValeur"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/quantiteEnfant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/plusTarifEnfant"
+            app:layout_constraintBottom_toBottomOf="@id/plusTarifEnfant"
+            app:layout_constraintEnd_toStartOf="@id/plusTarifEnfant"
+            android:layout_marginEnd="8dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/moinsTarifEnfant"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moins"
+            app:layout_constraintTop_toTopOf="@id/quantiteEnfant"
+            app:layout_constraintBottom_toBottomOf="@id/quantiteEnfant"
+            app:layout_constraintEnd_toStartOf="@id/quantiteEnfant"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tarifEtudiantTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Tarif étudiant"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifEnfantValeur"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/tarifEtudiantValeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="10"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifEtudiantTxt"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/plusTarifEtudiant"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus_jaune"
+            app:layout_constraintTop_toTopOf="@id/tarifEtudiantValeur"
+            app:layout_constraintBottom_toBottomOf="@id/tarifEtudiantValeur"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/quantiteEtudiant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/plusTarifEtudiant"
+            app:layout_constraintBottom_toBottomOf="@id/plusTarifEtudiant"
+            app:layout_constraintEnd_toStartOf="@id/plusTarifEtudiant"
+            android:layout_marginEnd="8dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/moinsTarifEtudiant"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moins"
+            app:layout_constraintTop_toTopOf="@id/quantiteEtudiant"
+            app:layout_constraintBottom_toBottomOf="@id/quantiteEtudiant"
+            app:layout_constraintEnd_toStartOf="@id/quantiteEtudiant"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tarifNormalTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Tarif normal"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifEtudiantValeur"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/tarifNormalValeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="15"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifNormalTxt"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/plusTarifNormal"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus_jaune"
+            app:layout_constraintTop_toTopOf="@id/tarifNormalValeur"
+            app:layout_constraintBottom_toBottomOf="@id/tarifNormalValeur"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/quantiteNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/plusTarifNormal"
+            app:layout_constraintBottom_toBottomOf="@id/plusTarifNormal"
+            app:layout_constraintEnd_toStartOf="@id/plusTarifNormal"
+            android:layout_marginEnd="8dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/moinsTarifNormal"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moins"
+            app:layout_constraintTop_toTopOf="@id/quantiteNormal"
+            app:layout_constraintBottom_toBottomOf="@id/quantiteNormal"
+            app:layout_constraintEnd_toStartOf="@id/quantiteNormal"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tarifSeniorTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Tarif senior"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifNormalValeur"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:id="@+id/tarifSeniorValeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="18"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tarifSeniorTxt"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/plusTarifSenior"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plus_jaune"
+            app:layout_constraintTop_toTopOf="@id/tarifSeniorValeur"
+            app:layout_constraintBottom_toBottomOf="@id/tarifSeniorValeur"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/quantiteSenior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/plusTarifSenior"
+            app:layout_constraintBottom_toBottomOf="@id/plusTarifSenior"
+            app:layout_constraintEnd_toStartOf="@id/plusTarifSenior"
+            android:layout_marginEnd="8dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/moinsTarifSenior"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moins"
+            app:layout_constraintTop_toTopOf="@id/quantiteSenior"
+            app:layout_constraintBottom_toBottomOf="@id/quantiteSenior"
+            app:layout_constraintEnd_toStartOf="@id/quantiteSenior"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tarifsRestantsTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tarifs restants à séléctionner : "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/quantiteSenior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp"/>
+
+        <TextView
+            android:id="@+id/tarifsRestantsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/tarifsRestantsTxt"
+            app:layout_constraintBottom_toBottomOf="@id/tarifsRestantsTxt"
+            app:layout_constraintStart_toEndOf="@id/tarifsRestantsTxt"/>
+
+
+        <Button
+            android:id="@+id/validerButtonTarifs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="VALIDER MES TARIFS"
+            android:textSize="18sp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/yellow"
+            app:layout_constraintTop_toBottomOf="@id/tarifsRestantsTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</ScrollView>

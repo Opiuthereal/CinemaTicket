@@ -1,7 +1,9 @@
 package com.example.recyclerviewdemo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.SharedPreferences;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.recyclerviewdemo.databinding.ActivityMainBinding;
 import com.example.recyclerviewdemo.databinding.ActivityReservationPlacesBinding;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,11 +119,49 @@ public class ReservationPlaces extends AppCompatActivity {
         boutonValidation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Pour récupérer les places vertes : leur nombre et leur position
+                SharedPreferences sharedPreferences = getSharedPreferences("reservation", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                ArrayList<Integer> siegesVerts = new ArrayList<>();
+
+                for (int i = 0; i < siegeImages.length; i++) {
+                    if (siegeImages[i] == R.drawable.siege_vert) {
+                        siegesVerts.add(i);
+                    }
+                }
+
+                // Enregistrement du nombre
+                editor.putInt("nombre_sieges_verts", siegesVerts.size());
+
+                // Conversion de la liste en format String séparée par des virgules
+                StringBuilder positions = new StringBuilder();
+                for (int i = 0; i < siegesVerts.size(); i++) {
+                    positions.append(siegesVerts.get(i));
+                    if (i < siegesVerts.size() - 1) {
+                        positions.append(",");
+                    }
+                }
+                editor.putString("positions_sieges_verts", positions.toString());
+
+                editor.apply();
+
+                // Lancer l'activité suivante
                 Intent intent = new Intent(ReservationPlaces.this, ActivityTarif.class);
                 startActivity(intent);
             }
         });
 
+
+        //event de la croix retour de cette page
+        // action de la croix pour retour à la page d'avant, la page précédente
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        final ShapeableImageView croixImage = findViewById(R.id.croix_image);
+
+        croixImage.setOnClickListener(v -> {
+            onBackPressed();  // Retourner à l'activité précédente
+        });
 
 
 

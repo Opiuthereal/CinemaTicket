@@ -23,7 +23,7 @@
             </activity>
         <activity
             android:name=".ActivityTarif"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ReservationPlaces"
             android:exported="false" />
