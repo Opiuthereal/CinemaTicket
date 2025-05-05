@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".TicketResumeAll">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Logo centré en haut -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cineLogo"
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cine_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+
+        <!-- Croix de retour alignée à gauche du logo -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/croix_image_infos_total"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:alpha="0.8"
+            android:scaleType="centerCrop"
+            android:src="@drawable/croix"
+            app:layout_constraintTop_toTopOf="@id/cineLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="16dp" />
+
+        <!-- Titre -->
+        <TextView
+            android:id="@+id/resumeTicketTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Résumé du ticket"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintTop_toBottomOf="@id/cineLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/cineFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom du cinéma"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/resumeTicketTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/titreFilmFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom du Film"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/cineFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Image du film -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ImageFilmResumeTicket"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.7"
+            android:scaleType="centerCrop"
+            android:src="@drawable/montecristoback"
+            app:layout_constraintTop_toBottomOf="@id/titreFilmFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" />
+
+        <!-- Texte à droite de l’image -->
+        <TextView
+            android:id="@+id/jourFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="jour du Film"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/ImageFilmResumeTicket"
+            app:layout_constraintTop_toTopOf="@id/ImageFilmResumeTicket"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp" />
+
+        <TextView
+            android:id="@+id/heureFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="heure du Film"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/jourFinal"
+            app:layout_constraintStart_toEndOf="@id/ImageFilmResumeTicket"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp" />
+
+        <TextView
+            android:id="@+id/tyoeDiffusionFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="type de diffusion"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/heureFinal"
+            app:layout_constraintStart_toEndOf="@id/ImageFilmResumeTicket"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp" />
+
+        <TextView
+            android:id="@+id/nbPlacesFinal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="nombre de places prises"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/ImageFilmResumeTicket"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="22dp" />
+
+
+        <TextView
+            android:id="@+id/positionsPlacesFinal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="position des places"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/nbPlacesFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/prixFinal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Prix final de toutes les places"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/positionsPlacesFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/nomUserFinal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="nom de l'utilisateur"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/prixFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/prenomUserFinal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="prenom de l'utilisateur"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/nomUserFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/emailUserFinal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="email de l'utilisateur"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/prenomUserFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+
+
+        <!-- QR Code -->
+        <ImageView
+            android:id="@+id/qrCodeImageView"
+            android:layout_width="370dp"
+            android:layout_height="370dp"
+            android:contentDescription="QR Code"
+            app:layout_constraintTop_toBottomOf="@id/emailUserFinal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- CheckBox -->
+        <CheckBox
+            android:id="@+id/saveTicketCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enregistrer le ticket"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/qrCodeImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"/>
+
+        <Button
+            android:id="@+id/validerButtonConfirmer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="CONFIRMER ET PAYER"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="32dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/yellow"
+            app:layout_constraintTop_toBottomOf="@id/saveTicketCheckBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -66,10 +66,10 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
                 // Si le résumé est déjà visible, on le cache. Sinon, on l'affiche.
                 if (resumeFilm.getVisibility() == View.VISIBLE) {
                     resumeFilm.setVisibility(View.GONE);
-                    resumeBouton.setText("Infos et détails >"); // On change le texte pour indiquer que l'on peut déplier.
+                    resumeBouton.setText("Infos et détails  ▶"); // On change le texte pour indiquer que l'on peut déplier.
                 } else {
                     resumeFilm.setVisibility(View.VISIBLE);
-                    resumeBouton.setText("Infos et détails <"); // On change le texte pour indiquer que l'on peut replier.
+                    resumeBouton.setText("Infos et détails  ▼"); // On change le texte pour indiquer que l'on peut replier.
                 }
             }
         });

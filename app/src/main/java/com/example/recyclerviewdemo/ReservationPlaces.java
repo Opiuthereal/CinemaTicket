@@ -132,6 +132,12 @@ public class ReservationPlaces extends AppCompatActivity {
                     }
                 }
 
+                // Vérifie si aucun siège sélectionné
+                if (siegesVerts.isEmpty()) {
+                    Toast.makeText(ReservationPlaces.this, "Veuillez sélectionner au moins un siège", Toast.LENGTH_SHORT).show();
+                    return; // Empêche de continuer
+                }
+
                 // Enregistrement du nombre
                 editor.putInt("nombre_sieges_verts", siegesVerts.size());
 
