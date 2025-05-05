@@ -5,4 +5,23 @@
     </style>
 
     <style name="ShapeAppearance">ShapeAppearance</style>
+
+    <style name="ModernInfoText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+
+    <style name="ModernInfoCenteredText" parent="ModernInfoText">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="RoundedImageStyle" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
 </resources>
