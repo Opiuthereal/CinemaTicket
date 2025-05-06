@@ -10,22 +10,41 @@
     android:paddingTop="10dp">
 
     <TextView
-        android:id="@+id/horaire1Film"
-        android:layout_marginTop="10dp"
+        android:id="@+id/jour1Film"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="5dp"
-        android:text="14:00"
+        android:text="14/05"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/vostHoraire1Film"
-        android:text="VF"
-        android:layout_marginLeft="5dp"
-        android:textSize="15sp"
-        android:textColor="@android:color/black"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:id="@+id/horaire1Film"
+            android:text="14:00"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/vostHoraire1Film"
+            android:text="VF"
+            android:layout_marginLeft="5dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -10,11 +10,14 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -33,7 +36,7 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
 
         //controles de vidéo - code base
         VideoView videoView = findViewById(R.id.videoViewBandeAnnonce);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.monte_cristo;
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.monte_cristovideo;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
 
@@ -131,11 +134,11 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
         RecyclerView recyclerViewHoraire = findViewById(R.id.recyclerViewHoraire);
 
         List<ItemHoraire> itemsHoraires = new ArrayList<>();
-        itemsHoraires.add(new ItemHoraire("12:00", "VOST"));
-        itemsHoraires.add(new ItemHoraire("14:00", "VF"));
-        itemsHoraires.add(new ItemHoraire("15:30", "VO"));
-        itemsHoraires.add(new ItemHoraire("17:00", "VF"));
-        itemsHoraires.add(new ItemHoraire("19:45", "VF"));
+        itemsHoraires.add(new ItemHoraire("14/05","12:00", "VOST"));
+        itemsHoraires.add(new ItemHoraire("15/05","14:00", "VF"));
+        itemsHoraires.add(new ItemHoraire("16/05","15:30", "VO"));
+        itemsHoraires.add(new ItemHoraire("17/05","17:00", "VF"));
+        itemsHoraires.add(new ItemHoraire("18/05","19:45", "VF"));
 
         // Configuration du RecyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -174,6 +177,15 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
                 .replace(R.id.fragmentTicketReservation, fragment)
                 .addToBackStack(null)
                 .commit();
+
+        // Faire défiler vers le fragment après une petite attente (le temps que le fragment apparaisse)
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            ScrollView scrollView = findViewById(R.id.scrollviewDown);
+            if (scrollView != null && fragmentContainer != null) {
+                scrollView.smoothScrollTo(0, fragmentContainer.getTop());
+            }
+        }, 200); // 200 ms d’attente pour que le fragment soit bien ajouté
+
 
     }
 

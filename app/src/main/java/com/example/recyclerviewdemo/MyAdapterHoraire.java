@@ -32,6 +32,7 @@ public class MyAdapterHoraire extends RecyclerView.Adapter<MyViewHolderHoraire> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderHoraire holder, int position) {
+        holder.dateOfFilm.setText(itemsHoraires.get(position).getDateFilm());
         holder.horaireOfFilm.setText(itemsHoraires.get(position).getHoraireFilm());
         holder.version.setText(itemsHoraires.get(position).getVostHoraireFilm());
         ItemHoraire currentItem = itemsHoraires.get(position);

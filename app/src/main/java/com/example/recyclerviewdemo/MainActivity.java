@@ -2,23 +2,15 @@ package com.example.recyclerviewdemo;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Insets;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<FilmRecyclerView> films = new ArrayList<>();
         films.add(new FilmRecyclerView("Le compte de Monte Cristo", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.montecristoback, R.drawable.pegi16));
-        films.add(new FilmRecyclerView("Batman", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batman, R.drawable.pegi16));
+        films.add(new FilmRecyclerView("Batman", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batmanbegins, R.drawable.pegi16));
         // Ajoute autant de films que tu veux
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -77,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<FilmRecyclerView> films3 = new ArrayList<>();
         films3.add(new FilmRecyclerView("HAHA", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.montecristoback, R.drawable.pegi16));
-        films3.add(new FilmRecyclerView("LOL", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batman, R.drawable.pegi16));
+        films3.add(new FilmRecyclerView("LOL", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batmanbegins, R.drawable.pegi16));
         // Ajoute autant de films que tu veux
 
         recyclerView3.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -103,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         List<FilmRecyclerView> films5 = new ArrayList<>();
         films5.add(new FilmRecyclerView("NAN", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.montecristoback, R.drawable.pegi16));
-        films5.add(new FilmRecyclerView("OK DAK", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batman, R.drawable.pegi16));
+        films5.add(new FilmRecyclerView("OK DAK", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batmanbegins, R.drawable.pegi16));
         // Ajoute autant de films que tu veux
 
         recyclerView5.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

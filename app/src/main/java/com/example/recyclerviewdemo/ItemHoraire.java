@@ -2,13 +2,24 @@ package com.example.recyclerviewdemo;
 
 public class ItemHoraire {
 
+    String dateFilm;
+
     String horaireFilm;
     String vostHoraireFilm;
 
 
-    public ItemHoraire(String horaireFilm, String vostHoraireFilm) {
+    public ItemHoraire(String dateFilm, String horaireFilm, String vostHoraireFilm) {
+        this.dateFilm = dateFilm;
         this.horaireFilm = horaireFilm;
         this.vostHoraireFilm = vostHoraireFilm;
+    }
+
+    public String getDateFilm() {
+        return dateFilm;
+    }
+
+    public void setDateFilm(String dateFilm) {
+        this.dateFilm = dateFilm;
     }
 
     public String getHoraireFilm() {
