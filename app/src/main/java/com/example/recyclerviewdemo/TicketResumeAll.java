@@ -1,5 +1,7 @@
 package com.example.recyclerviewdemo;
 
+import static com.example.recyclerviewdemo.DataMainActivity.setImage;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -66,22 +68,24 @@ public class TicketResumeAll extends AppCompatActivity {
         TextView heureView = findViewById(R.id.heureFinal);
         TextView versionView = findViewById(R.id.tyoeDiffusionFinal);
 
+        ShapeableImageView image = findViewById(R.id.ImageFilmResumeTicket);
 
+        setImage(image, titre);
 
-        nomTextView.setText(nom);
-        prenomTextView.setText(prenom);
-        emailTextView.setText(email);
-        placesTextView.setText(String.valueOf(nombreSiegesVerts));
-        prixTextView.setText(totalAPayer + " €");
+        nomTextView.setText("Nom : " + nom);
+        prenomTextView.setText("Prénom : " + prenom);
+        emailTextView.setText("Email : " + email);
+        placesTextView.setText(String.valueOf("Nombre de sièges : " + nombreSiegesVerts));
+        prixTextView.setText("Total à payer : " + totalAPayer + " €");
         positionView.setText("Sièges aux positions : " + positionsSieges);
         nomCineView.setText(cinema);
         titreView.setText(titre);
-        jourView.setText(jour);
-        heureView.setText(heure);
-        versionView.setText(version);
+        jourView.setText("Jour : " + jour);
+        heureView.setText("Heure : " + heure);
+        versionView.setText("Diffusion : " + version);
 
         // Exemple de données à encoder
-        String qrData = "Nom: " + nom + "\nPrénom:" + prenom + "\nemail:" +  email + "\nNomFilm" + titre + "\nHoraireJour" + jour + "\nHoraireHeure" + heure + "\nPositionsSieges" + positionsSieges;
+        String qrData = "Nom : " + nom + "\nPrénom : " + prenom + "\nEmail : " +  email + "\nNomFilm : " + titre + "\nHoraireJour : " + jour + "\nHoraireHeure : " + heure + "\nPositionsSieges : " + positionsSieges;
 
         try {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();

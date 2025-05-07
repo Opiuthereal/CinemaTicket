@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -15,15 +16,19 @@ import android.widget.Toast;
 import com.example.recyclerviewdemo.databinding.ActivityMainBinding;
 import com.example.recyclerviewdemo.databinding.ActivityReservationPlacesBinding;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class ReservationPlaces extends AppCompatActivity {
 
-    ActivityReservationPlacesBinding binding;
+    private ActivityReservationPlacesBinding binding;
 
+    // Déclare siegeImages comme une variable d'instance
+    private int[] siegeImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,78 +36,47 @@ public class ReservationPlaces extends AppCompatActivity {
         binding = ActivityReservationPlacesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Récupération des informations passées à l'activité
+        String jour = getIntent().getStringExtra("jour");
+        String heure = getIntent().getStringExtra("heure");
+        String cinema = getIntent().getStringExtra("idCinema");
+        Timestamp date = DataMainActivity.changeToDate(jour, heure);
+        String titre = getIntent().getStringExtra("titre");
+        String version = getIntent().getStringExtra("version");
 
-        //Ici les placements des sièges via des ArrayList
-        List<Integer> siegeList = new ArrayList<>();
+        List<Integer> siegeList = new ArrayList<>(Collections.nCopies(180, 0));
 
-        for (int i = 0; i < 15; i++) { // 15 lignes
-            if (i == 1) {
-                // Ligne 2 invisible
-                for (int j = 0; j < 12; j++) {
-                    siegeList.add(0);
-                }
-                continue;
-            }
-
-            if (i == 14) {
-                // Dernière ligne : seuls les sièges des colonnes 5 à 8 sont visibles
-                for (int j = 0; j < 12; j++) {
-                    if (j >= 4 && j <= 7) {
-                        siegeList.add(R.drawable.siege_jaune); // visibles
-                    } else {
-                        siegeList.add(0); // invisibles
-                    }
-                }
-                continue;
-            }
-
-            // Pour les autres lignes
-            for (int j = 0; j < 12; j++) {
-                if (j == 3 || j == 8) {
-                    siegeList.add(0); // colonnes 4 et 9 invisibles
-                } else {
-                    siegeList.add(R.drawable.siege_jaune);
-                }
-            }
-        }
-
-        // Placer un siège gris aléatoirement parmi les sièges jaunes visibles
-        List<Integer> indicesVisibles = new ArrayList<>();
-        for (int i = 0; i < siegeList.size(); i++) {
-            if (siegeList.get(i) == R.drawable.siege_jaune) {
-                indicesVisibles.add(i);
-            }
-        }
-        if (!indicesVisibles.isEmpty()) {
-            Random random = new Random();
-            int randomIndex = indicesVisibles.get(random.nextInt(indicesVisibles.size()));
-            siegeList.set(randomIndex, R.drawable.siege_gris);
-        }
-
-        // Conversion en tableau
-        int[] siegeImages = new int[siegeList.size()];
-        for (int i = 0; i < siegeList.size(); i++) {
-            siegeImages[i] = siegeList.get(i);
-        }
-
-        //-----------------------------------------------------------------------------------
-
-
-
-
-        GridAdapter gridAdapter = new GridAdapter(ReservationPlaces.this, siegeImages);
-        binding.grillePlaces.setAdapter(gridAdapter);
-
-        binding.grillePlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // Appel de la fonction setSalle
+        DataMainActivity.setSalle(siegeList, cinema, date, titre, new DataMainActivity.SalleCallback() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onSalleFound(String salle) {
+                Log.d("Salle", "Salle trouvée : " + salle);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("Salle", "Erreur récupération salle", e);
+            }
+        }, () -> {
+            // Ce bloc s'exécute APRES que Firestore ait mis à jour siegeList
+
+            // Initialiser siegeImages avec la taille de siegeList
+            siegeImages = new int[siegeList.size()];
+            for (int i = 0; i < siegeList.size(); i++) {
+                siegeImages[i] = siegeList.get(i);
+            }
+
+            // Création et configuration de GridAdapter
+            GridAdapter gridAdapter = new GridAdapter(ReservationPlaces.this, siegeImages);
+            binding.grillePlaces.setAdapter(gridAdapter);
+
+            // Gestion de l'événement de clic sur un siège
+            binding.grillePlaces.setOnItemClickListener((parent, view, position, id) -> {
                 if (siegeImages[position] != 0) {
                     if (siegeImages[position] == R.drawable.siege_jaune) {
-                        // Jaune → Vert
                         siegeImages[position] = R.drawable.siege_vert;
                         Toast.makeText(ReservationPlaces.this, "Place sélectionnée à la position " + position, Toast.LENGTH_SHORT).show();
                     } else if (siegeImages[position] == R.drawable.siege_vert) {
-                        // Vert → Jaune
                         siegeImages[position] = R.drawable.siege_jaune;
                         Toast.makeText(ReservationPlaces.this, "Place désélectionnée à la position " + position, Toast.LENGTH_SHORT).show();
                     }
@@ -110,56 +84,37 @@ public class ReservationPlaces extends AppCompatActivity {
                     // Mise à jour de l'affichage
                     gridAdapter.notifyDataSetChanged();
                 }
-            }
+            });
         });
 
-
-        //ici l'event du bouton valider mes places qui amenent à ActivityTarif
+        // Gestion de l'événement du bouton de validation des places
         Button boutonValidation = findViewById(R.id.validationPlaces);
         boutonValidation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Pour récupérer les places vertes : leur nombre et leur position
+                // Récupérer les places vertes sélectionnées
                 SharedPreferences sharedPreferences = getSharedPreferences("reservation", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                int nombre_sieges_verts = getIntent().getIntExtra("nombre_sieges_verts", 0);
-                String positionsSieges = getIntent().getStringExtra("positions_sieges_verts");
-                String titre = getIntent().getStringExtra("titre");
-                String jour = getIntent().getStringExtra("jour");
-                String heure = getIntent().getStringExtra("heure");
-                String version = getIntent().getStringExtra("version");
-                String cinema = getIntent().getStringExtra("idCinema");
-
-                /*
-                // Récupération des données depuis SharedPreferences
-                String titre = sharedPreferences.getString("titre", "Titre inconnu");
-                String jour = sharedPreferences.getString("jour", "Jour inconnu");
-                String heure = sharedPreferences.getString("heure", "Heure inconnue");
-                String version = sharedPreferences.getString("version", "Version inconnue");
-                String cinema = sharedPreferences.getString("idCinema", "Nom Cinéma");
-
-                 */
-
                 ArrayList<Integer> siegesVerts = new ArrayList<>();
 
+                // Récupérer les positions des sièges verts dans siegeImages
                 for (int i = 0; i < siegeImages.length; i++) {
                     if (siegeImages[i] == R.drawable.siege_vert) {
                         siegesVerts.add(i);
                     }
                 }
 
-                // Vérifie si aucun siège sélectionné
+                // Vérifier si des sièges ont été sélectionnés
                 if (siegesVerts.isEmpty()) {
                     Toast.makeText(ReservationPlaces.this, "Veuillez sélectionner au moins un siège", Toast.LENGTH_SHORT).show();
-                    return; // Empêche de continuer
+                    return; // Empêcher de continuer si aucun siège n'est sélectionné
                 }
 
-                // Enregistrement du nombre
+                // Enregistrement du nombre de sièges sélectionnés
                 editor.putInt("nombre_sieges_verts", siegesVerts.size());
 
-                // Conversion de la liste en format String séparée par des virgules
+                // Conversion de la liste de positions en une chaîne séparée par des virgules
                 StringBuilder positions = new StringBuilder();
                 for (int i = 0; i < siegesVerts.size(); i++) {
                     positions.append(siegesVerts.get(i));
@@ -171,40 +126,30 @@ public class ReservationPlaces extends AppCompatActivity {
                 editor.putString("titre", titre);
                 editor.putString("jour", jour);
                 editor.putString("heure", heure);
-                editor.putString("version", version);
                 editor.putString("idCinema", cinema);
+                editor.putString("version", version);
 
                 editor.apply();
 
-                // Lancer l'activité suivante
+                // Lancer l'activité suivante avec les données de réservation
                 Intent intent = new Intent(ReservationPlaces.this, ActivityTarif.class);
                 intent.putExtra("positions_sieges_verts", positions.toString());
                 intent.putExtra("nombre_sieges_verts", siegesVerts.size());
                 intent.putExtra("titre", titre);
                 intent.putExtra("jour", jour);
                 intent.putExtra("heure", heure);
-                intent.putExtra("version", version);
                 intent.putExtra("idCinema", cinema);
+                intent.putExtra("version", version);
                 startActivity(intent);
             }
         });
 
-
-        //event de la croix retour de cette page
-        // action de la croix pour retour à la page d'avant, la page précédente
+        // Gestion de l'événement de la croix pour revenir à la page précédente
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         final ShapeableImageView croixImage = findViewById(R.id.croix_image);
 
         croixImage.setOnClickListener(v -> {
-            onBackPressed();  // Retourner à l'activité précédente
+            onBackPressed();  // Retour à l'activité précédente
         });
-
-
-
-        // Récupérer les données passées (comme l'horaire sélectionné)
-        //String horaire = getIntent().getStringExtra("horaire");
-        // Utiliser cette donnée dans l'activité si nécessaire
-
-
     }
 }

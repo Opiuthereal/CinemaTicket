@@ -59,6 +59,8 @@
             android:id="@+id/cineFinal"
             style="@style/ModernInfoText"
             android:text="Nom du cinéma"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/resumeTicketTxt" />
 
         <TextView
@@ -100,21 +102,12 @@
             app:layout_constraintTop_toBottomOf="@id/heureFinal"
             app:layout_constraintStart_toStartOf="@id/jourFinal" />
 
-        <TextView
-            android:id="@+id/nbPlacesTxt"
-            style="@style/ModernInfoText"
-            android:textStyle="bold"
-            android:text="Nombre de places : "
-            app:layout_constraintTop_toBottomOf="@id/ImageFilmResumeTicket"
-            app:layout_constraintStart_toStartOf="parent"
-
-        />
 
         <TextView
             android:id="@+id/nbPlacesFinal"
             style="@style/ModernInfoCenteredText"
             android:text="Nombre de places prises"
-            app:layout_constraintTop_toBottomOf="@id/nbPlacesTxt"
+            app:layout_constraintTop_toBottomOf="@id/ImageFilmResumeTicket"
 
         />
 
@@ -122,9 +115,10 @@
 
         <TextView android:id="@+id/positionsPlacesFinal" style="@style/ModernInfoCenteredText" android:text="Position des places" app:layout_constraintTop_toBottomOf="@id/nbPlacesFinal" />
 
-        <TextView android:id="@+id/prixFinal" style="@style/ModernInfoCenteredText" android:text="Prix final de toutes les places" app:layout_constraintTop_toBottomOf="@id/positionsPlacesFinal" />
+        <TextView android:id="@+id/prixFinal" style="@style/ModernInfoCenteredText" android:text="Prix final de toutes les places" app:layout_constraintTop_toBottomOf="@id/emailUserFinal"
+            android:textSize="25sp"/>
 
-        <TextView android:id="@+id/nomUserFinal" style="@style/ModernInfoCenteredText" android:text="Nom de l'utilisateur" app:layout_constraintTop_toBottomOf="@id/prixFinal" />
+        <TextView android:id="@+id/nomUserFinal" style="@style/ModernInfoCenteredText" android:text="Nom de l'utilisateur" app:layout_constraintTop_toBottomOf="@id/positionsPlacesFinal" />
 
         <TextView android:id="@+id/prenomUserFinal" style="@style/ModernInfoCenteredText" android:text="Prénom de l'utilisateur" app:layout_constraintTop_toBottomOf="@id/nomUserFinal" />
 
@@ -136,7 +130,7 @@
             android:layout_height="400dp"
             android:layout_marginTop="16dp"
             android:contentDescription="QR Code"
-            app:layout_constraintTop_toBottomOf="@id/emailUserFinal"
+            app:layout_constraintTop_toBottomOf="@id/prixFinal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -5,8 +5,10 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -32,6 +34,12 @@ public class DataMainActivity {
     public interface HoraireCallback {
         void onHorairesLoaded(List<ItemHoraire> itemsHoraires);
     }
+
+    public interface SalleCallback {
+        void onSalleFound(String salle);
+        void onError(Exception e);
+    }
+
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static void addAffiche(Context context, String nomCinema, FilmCallback callback) {
@@ -226,4 +234,172 @@ public class DataMainActivity {
                 });
     }
 
+    public static void setImage(ShapeableImageView image, String titre){
+        String docId = DatabaseActivity.toMajusculeNoAccent(titre);
+
+        db.collection("Film")
+                .document(docId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String imageName = documentSnapshot.getString("image");
+
+                        if (imageName != null && !imageName.isEmpty()) {
+                            int resId = image.getContext().getResources()
+                                    .getIdentifier(imageName, "drawable", image.getContext().getPackageName());
+                            if (resId != 0) {
+                                image.setImageResource(resId);
+                            } else {
+                                image.setImageResource(R.drawable.cine_logo); // image par défaut si introuvable
+                            }
+                        } else {
+                            image.setImageResource(R.drawable.cine_logo);
+                        }
+                    } else {
+                        image.setImageResource(R.drawable.cine_logo);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Erreur récupération image film", e);
+                    image.setImageResource(R.drawable.cine_logo);
+                });
+    }
+
+    public static void setTarif(TextView enfants, TextView etudiant, TextView normal, TextView senior, String cinema) {
+        String docId = DatabaseActivity.toMajusculeNoAccent(cinema);
+
+        db.collection("Cinema")
+                .document(docId)
+                .collection("Tarif")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        String id = doc.getId();
+                        String prix = doc.getString("prix");
+
+                        if (prix != null) {
+                            switch (id.toLowerCase(Locale.ROOT)) {
+                                case "enfant":
+                                    enfants.setText(prix);
+                                    break;
+                                case "etudiant":
+                                    etudiant.setText(prix);
+                                    break;
+                                case "normal":
+                                    normal.setText(prix);
+                                    break;
+                                case "senior":
+                                    senior.setText(prix);
+                                    break;
+                            }
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("Firestore", "Erreur récupération des tarifs", e));
+    }
+
+    public static Timestamp changeToDate(String jour, String heure) {
+        try {
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            String fullDate = jour + "/" + currentYear + " " + heure;
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            Date date = format.parse(fullDate);
+
+            if (date != null) {
+                return new Timestamp(date);
+            }
+        } catch (ParseException e) {
+            Log.e("Firestore", "Erreur dans la fonction de Database", e);
+        }
+
+        Log.e("Firestore", "Erreur dans la fonction de Database");
+        return new Timestamp(new Date()); // retourne une date par défaut pour éviter le null
+    }
+
+
+    public static void setSalle(List<Integer> siegeList, String nomCine, Timestamp date, String film, SalleCallback callback, Runnable onComplete) {
+        String idCine = DatabaseActivity.toMajusculeNoAccent(nomCine);
+        String idFilm = DatabaseActivity.toMajusculeNoAccent(film);
+
+        db.collection("Cinema")
+                .document(idCine)
+                .collection("Diffusion")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm", Locale.getDefault());
+                    String targetDate = dateFormat.format(date.toDate());
+
+                    for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                        Timestamp docTimestamp = doc.getTimestamp("date");
+                        DocumentReference filmRef = doc.getDocumentReference("Film");
+
+                        if (docTimestamp != null && filmRef != null) {
+                            String docDateFormatted = dateFormat.format(docTimestamp.toDate());
+
+                            if (docDateFormatted.equals(targetDate) && filmRef.getPath().equals("Film/" + idFilm)) {
+                                // Récupération de la référence 'Salle'
+                                DocumentReference salleRef = (DocumentReference) doc.get("Salle");
+
+                                if (salleRef != null) {
+                                    // Récupérer le document de la salle à partir de la référence
+                                    salleRef.get()
+                                            .addOnSuccessListener(salleDoc -> {
+                                                // Récupérer le nom de la salle
+                                                String salle = salleDoc.getString("nomSalle"); // Remplace "nomSalle" par le champ réel dans ton document
+                                                callback.onSalleFound(salle != null ? salle : "Inconnue");
+
+                                                // AJOUT : aller dans la collection {salle}/Siege
+                                                salleRef.collection("Siege")
+                                                        .get()
+                                                        .addOnSuccessListener(seatSnapshot -> {
+                                                            // Parcours et mise à jour des sièges
+                                                            for (DocumentSnapshot seatDoc : seatSnapshot.getDocuments()) {
+                                                                List<Long> position = (List<Long>) seatDoc.get("position");
+                                                                if (position != null && position.size() == 2) {
+                                                                    int x = position.get(0).intValue();
+                                                                    int y = position.get(1).intValue();
+                                                                    int index = x + y * 12;
+
+                                                                    if (index >= 0 && index < siegeList.size()) {
+                                                                        siegeList.set(index, R.drawable.siege_jaune);
+                                                                    } else {
+                                                                        Log.w("Siege", "Index hors limite : " + index);
+                                                                    }
+                                                                } else {
+                                                                    Log.w("Siege", "Champ position invalide pour le siège : " + seatDoc.getId());
+                                                                }
+                                                            }
+
+                                                            // Appel à onComplete une fois les sièges récupérés
+                                                            onComplete.run();
+                                                        })
+                                                        .addOnFailureListener(e -> Log.e("Firestore", "Erreur récupération sièges", e));
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Log.e("Firestore", "Erreur récupération salle référence", e);
+                                                callback.onSalleFound("Inconnue");
+                                            });
+                                } else {
+                                    // Si la référence est null ou invalide
+                                    callback.onSalleFound("Inconnue");
+                                }
+
+                                return;
+                            }
+                        }
+                    }
+
+                    // Aucun document trouvé
+                    callback.onSalleFound("Inconnue");
+                    // Appel à onComplete dans le cas où il n'y a pas de résultat
+                    onComplete.run();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Erreur récupération salle", e);
+                    callback.onError(e);
+                    // Appel à onComplete en cas d'erreur
+                    onComplete.run();
+                });
+    }
 }

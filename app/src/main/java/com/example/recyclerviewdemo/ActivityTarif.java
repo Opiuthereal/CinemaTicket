@@ -37,6 +37,16 @@ public class ActivityTarif extends AppCompatActivity {
         TextView quantitetarifNormal = findViewById(R.id.quantiteNormal);
         TextView quantitetarifSenior = findViewById(R.id.quantiteSenior);
 
+
+        //les prix des tarifs différents que je récupère avec la sharedPreference nécessaire pour les mettre à jours
+        TextView tarifEnfant = findViewById(R.id.tarifEnfantValeur);
+        TextView tarifEtudiant = findViewById(R.id.tarifEtudiantValeur);
+        TextView tarifNormal = findViewById(R.id.tarifNormalValeur);
+        TextView tarifSenior = findViewById(R.id.tarifSeniorValeur);
+        String cinema = getIntent().getStringExtra("idCinema");
+
+        DataMainActivity.setTarif(tarifEnfant, tarifEtudiant, tarifNormal, tarifSenior,cinema);
+
         /*
         //ici on convertit les quantités pour les multiplier par les prix des tickets
         int valeurquantitetarifEnfant = Integer.parseInt(quantitetarifEnfant.getText().toString());
@@ -226,7 +236,7 @@ public class ActivityTarif extends AppCompatActivity {
         String jour = getIntent().getStringExtra("jour");
         String heure = getIntent().getStringExtra("heure");
         String version = getIntent().getStringExtra("version");
-        String cinema = getIntent().getStringExtra("idCinema");
+
 
         // Récupération des données depuis SharedPreferences
         /*
