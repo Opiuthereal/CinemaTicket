@@ -111,31 +111,31 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/genreFilm"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="genre"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@id/noteFilm"
-        app:layout_constraintStart_toEndOf="@id/dureeFilm"
-        android:layout_marginTop="30dp" />
+            <TextView
+                android:id="@+id/genreFilm"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="genre"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/noteFilm"
+                app:layout_constraintStart_toEndOf="@id/dureeFilm"
+                android:layout_marginTop="30dp" />
 
-    <!-- Age Restriction -->
-    <ImageView
-        android:id="@+id/ageRestrictionDetail"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="15dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/noteFilm"
-        app:layout_constraintStart_toEndOf="@id/genreFilm"
-        />
+            <!-- Age Restriction -->
+            <ImageView
+                android:id="@+id/ageRestrictionDetail"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toBottomOf="@id/noteFilm"
+                app:layout_constraintStart_toEndOf="@id/genreFilm"
+                />
 
             <TextView
                 android:id="@+id/dateSortieFilm"
@@ -151,18 +151,18 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/dateSortieFilmBdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="date de la sortie"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toEndOf="@id/dateSortieFilm"
-        app:layout_constraintTop_toBottomOf="@id/dureeFilm"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/dateSortieFilmBdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date de la sortie"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@id/dateSortieFilm"
+                app:layout_constraintTop_toBottomOf="@id/dureeFilm"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/faitPar"
@@ -178,46 +178,46 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/auteurs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="nom de l'auteur"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toEndOf="@id/faitPar"
-        app:layout_constraintTop_toBottomOf="@id/dateSortieFilmBdd"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/auteurs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="nom de l'auteur"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@id/faitPar"
+                app:layout_constraintTop_toBottomOf="@id/dateSortieFilmBdd"
+                android:layout_marginTop="10dp" />
 
-    <TextView
-        android:id="@+id/avec"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="avec"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toEndOf="@id/auteurs"
-        app:layout_constraintTop_toBottomOf="@id/dateSortieFilmBdd"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/avec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="avec"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@id/auteurs"
+                app:layout_constraintTop_toBottomOf="@id/dateSortieFilmBdd"
+                android:layout_marginTop="10dp" />
 
-    <TextView
-        android:id="@+id/acteurs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="nom de l'acteur"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toEndOf="@id/avec"
-        app:layout_constraintTop_toBottomOf="@id/dateSortieFilmBdd"
-        android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/acteurs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="nom de l'acteur"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toEndOf="@id/avec"
+                app:layout_constraintTop_toBottomOf="@id/dateSortieFilmBdd"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/resumeButton"
@@ -234,6 +234,22 @@
 
             <TextView
                 android:id="@+id/resumeFilm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Victime d’un complot, le jeune Edmond Dantès est arrêté le jour de son mariage pour un crime qu’il n’a pas commis. Après quatorze ans de détention au château d’If, il parvient à s’évader. Devenu immensément riche, il revient sous l’identité du comte de Monte-Cristo pour se venger des trois hommes qui l’ont trahi."
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:visibility="gone"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toBottomOf="@id/resumeButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/nomVideo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Victime d’un complot, le jeune Edmond Dantès est arrêté le jour de son mariage pour un crime qu’il n’a pas commis. Après quatorze ans de détention au château d’If, il parvient à s’évader. Devenu immensément riche, il revient sous l’identité du comte de Monte-Cristo pour se venger des trois hommes qui l’ont trahi."
@@ -271,13 +287,13 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recyclerViewHoraire"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintTop_toBottomOf="@id/horairesFilm"
-                    android:orientation="horizontal"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerViewHoraire"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/horairesFilm"
+                android:orientation="horizontal"/>
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentTicketReservation"
@@ -297,3 +313,4 @@
     </ScrollView>
 
 </RelativeLayout>
+

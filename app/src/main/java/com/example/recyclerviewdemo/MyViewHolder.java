@@ -14,7 +14,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public BreakIterator titreTextView;
     // Déclaration des vues
     ImageView imageView, ageRestriction;
-    TextView titreView, horaire1View, horaire2View, horaire3View, horaire4View, vost1, vost2, vost3, vost4;
+    TextView titreView, horaire1View, horaire2View, horaire3View, horaire4View, vost1, vost2, vost3, vost4, nomCinoche;
 
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -31,5 +31,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         vost2 = itemView.findViewById(R.id.vostHeure2);
         vost3 = itemView.findViewById(R.id.vostHeure3);
         vost4 = itemView.findViewById(R.id.vostHeure4);
+        nomCinoche = itemView.findViewById(R.id.nomCinoche);
     }
 }

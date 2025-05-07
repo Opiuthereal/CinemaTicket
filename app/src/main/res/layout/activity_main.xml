@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="30dp"
-    android:background="@color/light_yellow"
+    android:background="@color/black"
     android:id="@+id/Main">
 
     <LinearLayout
@@ -23,19 +23,22 @@
             android:drawablePadding="8dp"
             android:inputType="text" />
 
-
         <Spinner
             android:id="@+id/spinnerCinema"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/spinner_background"
+            android:padding="12dp"
+            android:popupBackground="@color/black" />
 
-        </Spinner>
 
         <!-- Pathé -->
         <TextView
             android:id="@+id/nomCinema"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
             android:text="Pathé Wepler"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -52,12 +55,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pathé Palace"
+            android:textColor="@color/yellow"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="16dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFilms2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <TextView
+            android:id="@+id/nomCinema21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pathé Boulogne"
+            android:textColor="@color/yellow"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms21"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
@@ -69,7 +89,8 @@
             android:id="@+id/nomCinema3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UGC La Villette"
+            android:text="UGC cine Cité Paris"
+            android:textColor="@color/yellow"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="16dp"/>
@@ -84,7 +105,8 @@
             android:id="@+id/nomCinema4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="UGC Opéra"
+            android:text="UGC Issy les Moulineaux"
+            android:textColor="@color/yellow"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="16dp"/>
@@ -95,13 +117,30 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
+        <TextView
+            android:id="@+id/nomCinema41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UGC Opéra"
+            android:textColor="@color/yellow"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms41"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
         <!--Gaumont-->
 
         <TextView
             android:id="@+id/nomCinema5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gaumont Saint-Denis"
+            android:text="Gaumont"
+            android:textColor="@color/yellow"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_margin="16dp"/>
@@ -116,8 +155,9 @@
             android:id="@+id/nomCinema6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gaumont Boulogne Billancourt"
+            android:text="Gaumont Parnasse"
             android:textSize="24sp"
+            android:textColor="@color/yellow"
             android:textStyle="bold"
             android:layout_margin="16dp"/>
 
@@ -127,5 +167,22 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
 
+        <TextView
+            android:id="@+id/nomCinema61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gaumont Saint Denis"
+            android:textSize="24sp"
+            android:textColor="@color/yellow"
+            android:textStyle="bold"
+            android:layout_margin="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFilms61"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
     </LinearLayout>
 </ScrollView>
+

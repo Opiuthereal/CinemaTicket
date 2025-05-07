@@ -1,6 +1,7 @@
 package com.example.recyclerviewdemo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -32,18 +33,34 @@ public class MyAdapterHoraire extends RecyclerView.Adapter<MyViewHolderHoraire> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolderHoraire holder, int position) {
-        holder.dateOfFilm.setText(itemsHoraires.get(position).getDateFilm());
-        holder.horaireOfFilm.setText(itemsHoraires.get(position).getHoraireFilm());
-        holder.version.setText(itemsHoraires.get(position).getVostHoraireFilm());
         ItemHoraire currentItem = itemsHoraires.get(position);
+
+        // Remplir les vues avec les données
+        holder.dateOfFilm.setText(currentItem.getDateFilm());
+        holder.horaireOfFilm.setText(currentItem.getHoraireFilm());
+        holder.version.setText(currentItem.getVostHoraireFilm());
 
         // Ajouter un listener de clic à l'élément
         holder.itemView.setOnClickListener(v -> {
+            // Log pour débogage
             Log.d("MyAdapterHoraire", "Item clicked: " + currentItem.getHoraireFilm());
+
+            // Sauvegarder les informations dans SharedPreferences
+            SharedPreferences sharedPreferences = context.getSharedPreferences("FilmInfo", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            editor.putString("jour", currentItem.getDateFilm());   // Sauvegarder le jour
+            editor.putString("heure", currentItem.getHoraireFilm());  // Sauvegarder l'heure
+            editor.putString("version", currentItem.getVostHoraireFilm()); // Sauvegarder la version
+
+            editor.apply(); // Appliquer les changements
+
+            // Appeler le listener
             listener.onItemClick(currentItem);
         });
-
     }
+
+
 
     @Override
     public int getItemCount() {

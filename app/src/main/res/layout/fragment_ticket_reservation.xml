@@ -50,7 +50,7 @@
         android:text="Pathé Palace"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textColor="@color/yellow"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -75,29 +75,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true" />
 
-        <TextView
-            android:id="@+id/dureeSortieFilm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Durée :"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@id/titreFilm"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="8dp" />
 
-        <TextView
-            android:id="@+id/dureeSortieFilmBdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2h18"
-            android:textColor="@android:color/white"
-            android:textSize="15sp"
-            android:layout_below="@id/titreFilm"
-            android:layout_toEndOf="@id/dureeSortieFilm"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="8dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ImageFilmResumeTicket"
@@ -106,7 +84,7 @@
             android:alpha="0.7"
             android:scaleType="centerCrop"
             android:src="@drawable/montecristoback"
-            android:layout_below="@id/dureeSortieFilmBdd"/>
+            android:layout_below="@id/titreFilm"/>
 
         <Button
             android:id="@+id/validationTicket"

@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,177 +17,206 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.recyclerviewdemo.DataMainActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    // Déclaration globale des TextView pour ne pas les redéclarer dans chaque méthode
+    TextView nomCinema, nomCinema2, nomCinema21;
+    TextView nomCinema3, nomCinema4, nomCinema41;
+    TextView nomCinema5, nomCinema6, nomCinema61;
+
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        //Intent intent = new Intent(MainActivity.this, DatabaseActivity.class);
+        //startActivity(intent);
 
-        //Choix des cinemas avec mon spinner
         Spinner spinner = findViewById(R.id.spinnerCinema);
 
         String[] items = {"Cinéma Pathé", "Cinéma UGC", "Cinéma Gaumont"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, items
+                this,
+                R.layout.item_spinner,         // ton layout perso
+                R.id.text_spinner_item,       // le TextView ID que tu viens de créer
+                items
         );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
+
 
         //----------------------------------------------------------------------------------------------------
         //PATHE
 
 
-        //Pour le premier cinema avec ses films
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewFilms);
+        // Pathé
+        setupRecyclerView(R.id.recyclerViewFilms, "Pathé Wepler");
+        setupRecyclerView(R.id.recyclerViewFilms2, "Pathé Palace");
+        setupRecyclerView(R.id.recyclerViewFilms21, "Pathé Boulogne");
 
-        List<FilmRecyclerView> films = new ArrayList<>();
-        films.add(new FilmRecyclerView("Le compte de Monte Cristo", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.montecristoback, R.drawable.pegi16));
-        films.add(new FilmRecyclerView("Batman", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batmanbegins, R.drawable.pegi16));
-        // Ajoute autant de films que tu veux
+        // UGC
+        setupRecyclerView(R.id.recyclerViewFilms3, "UGC Ciné Cité Paris 19");
+        setupRecyclerView(R.id.recyclerViewFilms4, "UGC Issy Les Moulinaux");
+        setupRecyclerView(R.id.recyclerViewFilms41, "UGC Opéra");
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new MyAdapter(getApplicationContext(), films));
-
-        //Pour le second cinema avec ses films
-        RecyclerView recyclerView2 = findViewById(R.id.recyclerViewFilms2);
-
-        List<FilmRecyclerView> films2 = new ArrayList<>();
-        films2.add(new FilmRecyclerView("Ta mere en slip", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.ic_launcher_foreground, R.drawable.pegi16));
-        films2.add(new FilmRecyclerView("ton caca bo", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.ic_launcher_background, R.drawable.pegi16));
-        // Ajoute autant de films que tu veux
-
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView2.setAdapter(new MyAdapter(getApplicationContext(), films2));
-
-        //----------------------------------------------------------------------------------------------------
-        //UGC
-
-        //Pour le premier cinema avec ses films
-        RecyclerView recyclerView3 = findViewById(R.id.recyclerViewFilms3);
-
-        List<FilmRecyclerView> films3 = new ArrayList<>();
-        films3.add(new FilmRecyclerView("HAHA", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.montecristoback, R.drawable.pegi16));
-        films3.add(new FilmRecyclerView("LOL", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batmanbegins, R.drawable.pegi16));
-        // Ajoute autant de films que tu veux
-
-        recyclerView3.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView3.setAdapter(new MyAdapter(getApplicationContext(), films3));
-
-        //Pour le second cinema avec ses films
-        RecyclerView recyclerView4 = findViewById(R.id.recyclerViewFilms4);
-
-        List<FilmRecyclerView> films4 = new ArrayList<>();
-        films4.add(new FilmRecyclerView("PROUT", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.ic_launcher_foreground, R.drawable.pegi16));
-        films4.add(new FilmRecyclerView("MERDE", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.ic_launcher_background, R.drawable.pegi16));
-        // Ajoute autant de films que tu veux
-
-        recyclerView4.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView4.setAdapter(new MyAdapter(getApplicationContext(), films4));
-
-
-        //----------------------------------------------------------------------------------------------------
-        //GAUMONT
-
-        //Pour le premier cinema avec ses films
-        RecyclerView recyclerView5 = findViewById(R.id.recyclerViewFilms5);
-
-        List<FilmRecyclerView> films5 = new ArrayList<>();
-        films5.add(new FilmRecyclerView("NAN", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.montecristoback, R.drawable.pegi16));
-        films5.add(new FilmRecyclerView("OK DAK", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.batmanbegins, R.drawable.pegi16));
-        // Ajoute autant de films que tu veux
-
-        recyclerView5.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView5.setAdapter(new MyAdapter(getApplicationContext(), films5));
-
-        //Pour le second cinema avec ses films
-        RecyclerView recyclerView6 = findViewById(R.id.recyclerViewFilms6);
-
-        List<FilmRecyclerView> films6 = new ArrayList<>();
-        films6.add(new FilmRecyclerView("LES VOYAGEURS", "14:00", "16:30", "19:00", "21:45", "VO", "VOST", "VF", "VF", R.drawable.ic_launcher_foreground, R.drawable.pegi16));
-        films6.add(new FilmRecyclerView("BEN CA ALORS !", "13h00", "15h15", "18h30", "20h00", "VO", "VOST", "VF", "VO", R.drawable.ic_launcher_background, R.drawable.pegi16));
-        // Ajoute autant de films que tu veux
-
-        recyclerView6.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView6.setAdapter(new MyAdapter(getApplicationContext(), films6));
+        // Gaumont
+        setupRecyclerView(R.id.recyclerViewFilms5, "Gaumont");
+        setupRecyclerView(R.id.recyclerViewFilms6, "Gaumont Parnasse");
+        setupRecyclerView(R.id.recyclerViewFilms61, "Gaumont Saint-Denis");
 
         //-----------------------------------------------------------------------------------------------------------------------
 
-        //Tous les noms des cinémas pour ensuite agir dessus (apparaitre, disparaitre)
-        TextView nomCinema = findViewById(R.id.nomCinema);
-        TextView nomCinema2 = findViewById(R.id.nomCinema2);
-        TextView nomCinema3 = findViewById(R.id.nomCinema3);
-        TextView nomCinema4 = findViewById(R.id.nomCinema4);
-        TextView nomCinema5 = findViewById(R.id.nomCinema5);
-        TextView nomCinema6 = findViewById(R.id.nomCinema6);
+        // Récupération des TextView une seule fois
+        nomCinema = findViewById(R.id.nomCinema);
+        nomCinema2 = findViewById(R.id.nomCinema2);
+        nomCinema21 = findViewById(R.id.nomCinema21);
+        nomCinema3 = findViewById(R.id.nomCinema3);
+        nomCinema4 = findViewById(R.id.nomCinema4);
+        nomCinema41 = findViewById(R.id.nomCinema41);
+        nomCinema5 = findViewById(R.id.nomCinema5);
+        nomCinema6 = findViewById(R.id.nomCinema6);
+        nomCinema61 = findViewById(R.id.nomCinema61);
 
 
+        View.OnClickListener cinemaClickListener = v -> {
+            TextView clickedView = (TextView) v;
+            String cinemaChoisi = clickedView.getText().toString();
 
-        //event sur le spinner pour afficher tels ou tels films en fonction de la famille de cinéma séléctionnée
+            SharedPreferences sharedPreferences = getSharedPreferences("FilmInfo", Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString("cinema", cinemaChoisi).apply();
 
+        };
+
+
+        // Et tu l'appliques à tous tes TextView de cinéma
+        nomCinema.setOnClickListener(cinemaClickListener);
+        nomCinema2.setOnClickListener(cinemaClickListener);
+        nomCinema21.setOnClickListener(cinemaClickListener);
+        nomCinema3.setOnClickListener(cinemaClickListener);
+        nomCinema4.setOnClickListener(cinemaClickListener);
+        nomCinema41.setOnClickListener(cinemaClickListener);
+        nomCinema5.setOnClickListener(cinemaClickListener);
+        nomCinema6.setOnClickListener(cinemaClickListener);
+        nomCinema61.setOnClickListener(cinemaClickListener);
+
+
+        // ----------------------------------------------------------------------------------------------
+
+        spinner = findViewById(R.id.spinnerCinema);
+
+        // Listener du spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0: // Pathé
-                        recyclerView.setVisibility(View.VISIBLE);
-                        recyclerView2.setVisibility(View.VISIBLE);
-                        recyclerView3.setVisibility(View.GONE);
-                        recyclerView4.setVisibility(View.GONE);
-                        recyclerView5.setVisibility(View.GONE);
-                        recyclerView6.setVisibility(View.GONE);
-
-                        nomCinema.setVisibility(View.VISIBLE);
-                        nomCinema2.setVisibility(View.VISIBLE);
-                        nomCinema3.setVisibility(View.GONE);
-                        nomCinema4.setVisibility(View.GONE);
-                        nomCinema5.setVisibility(View.GONE);
-                        nomCinema6.setVisibility(View.GONE);
-                        break;
-                    case 1: // UGC
-                        recyclerView.setVisibility(View.GONE);
-                        recyclerView2.setVisibility(View.GONE);
-                        recyclerView3.setVisibility(View.VISIBLE);
-                        recyclerView4.setVisibility(View.VISIBLE);
-                        recyclerView5.setVisibility(View.GONE);
-                        recyclerView6.setVisibility(View.GONE);
-
-                        nomCinema.setVisibility(View.GONE);
-                        nomCinema2.setVisibility(View.GONE);
-                        nomCinema3.setVisibility(View.VISIBLE);
-                        nomCinema4.setVisibility(View.VISIBLE);
-                        nomCinema5.setVisibility(View.GONE);
-                        nomCinema6.setVisibility(View.GONE);
-                        break;
-                    case 2: // Gaumont
-                        recyclerView.setVisibility(View.GONE);
-                        recyclerView2.setVisibility(View.GONE);
-                        recyclerView3.setVisibility(View.GONE);
-                        recyclerView4.setVisibility(View.GONE);
-                        recyclerView5.setVisibility(View.VISIBLE);
-                        recyclerView6.setVisibility(View.VISIBLE);
-
-                        nomCinema.setVisibility(View.GONE);
-                        nomCinema2.setVisibility(View.GONE);
-                        nomCinema3.setVisibility(View.GONE);
-                        nomCinema4.setVisibility(View.GONE);
-                        nomCinema5.setVisibility(View.VISIBLE);
-                        nomCinema6.setVisibility(View.VISIBLE);
-                        break;
-                }
-
+                afficherFilms(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // Ne rien faire ici
+                // Ne rien faire
             }
         });
 
-        //ViewCompat A METTRE ici
+        spinner.setSelection(0); // optionnel, selon ton besoin
+        afficherFilms(0); // affichage initial
     }
+
+
+    private void setupRecyclerView(int recyclerViewId, String cinemaName) {
+        RecyclerView recyclerView = findViewById(recyclerViewId);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        DataMainActivity.addAffiche(this, cinemaName, films -> {
+            MyAdapter adapter = new MyAdapter(this, films);
+            recyclerView.setAdapter(adapter);
+        });
+    }
+
+    // Méthode à l'extérieur de onCreate
+    private void afficherFilms(int position) {
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewFilms);
+        RecyclerView recyclerView2 = findViewById(R.id.recyclerViewFilms2);
+        RecyclerView recyclerView21 = findViewById(R.id.recyclerViewFilms21);
+        RecyclerView recyclerView3 = findViewById(R.id.recyclerViewFilms3);
+        RecyclerView recyclerView4 = findViewById(R.id.recyclerViewFilms4);
+        RecyclerView recyclerView41 = findViewById(R.id.recyclerViewFilms41);
+        RecyclerView recyclerView5 = findViewById(R.id.recyclerViewFilms5);
+        RecyclerView recyclerView6 = findViewById(R.id.recyclerViewFilms6);
+        RecyclerView recyclerView61 = findViewById(R.id.recyclerViewFilms61);
+
+        switch (position) {
+            case 0: // Pathé
+                recyclerView.setVisibility(View.VISIBLE);
+                recyclerView2.setVisibility(View.VISIBLE);
+                recyclerView21.setVisibility(View.VISIBLE);
+                recyclerView3.setVisibility(View.GONE);
+                recyclerView4.setVisibility(View.GONE);
+                recyclerView41.setVisibility(View.GONE);
+                recyclerView5.setVisibility(View.GONE);
+                recyclerView6.setVisibility(View.GONE);
+                recyclerView61.setVisibility(View.GONE);
+
+                nomCinema.setVisibility(View.VISIBLE);
+                nomCinema2.setVisibility(View.VISIBLE);
+                nomCinema21.setVisibility(View.VISIBLE);
+                nomCinema3.setVisibility(View.GONE);
+                nomCinema4.setVisibility(View.GONE);
+                nomCinema41.setVisibility(View.GONE);
+                nomCinema5.setVisibility(View.GONE);
+                nomCinema6.setVisibility(View.GONE);
+                nomCinema61.setVisibility(View.GONE);
+                break;
+            case 1: // UGC
+                recyclerView.setVisibility(View.GONE);
+                recyclerView2.setVisibility(View.GONE);
+                recyclerView21.setVisibility(View.GONE);
+                recyclerView3.setVisibility(View.VISIBLE);
+                recyclerView4.setVisibility(View.VISIBLE);
+                recyclerView41.setVisibility(View.VISIBLE);
+                recyclerView5.setVisibility(View.GONE);
+                recyclerView6.setVisibility(View.GONE);
+                recyclerView61.setVisibility(View.GONE);
+
+                nomCinema.setVisibility(View.GONE);
+                nomCinema2.setVisibility(View.GONE);
+                nomCinema21.setVisibility(View.GONE);
+                nomCinema3.setVisibility(View.VISIBLE);
+                nomCinema4.setVisibility(View.VISIBLE);
+                nomCinema41.setVisibility(View.VISIBLE);
+                nomCinema5.setVisibility(View.GONE);
+                nomCinema6.setVisibility(View.GONE);
+                nomCinema61.setVisibility(View.GONE);
+                break;
+            case 2: // Gaumont
+                recyclerView.setVisibility(View.GONE);
+                recyclerView2.setVisibility(View.GONE);
+                recyclerView21.setVisibility(View.GONE);
+                recyclerView3.setVisibility(View.GONE);
+                recyclerView4.setVisibility(View.GONE);
+                recyclerView41.setVisibility(View.GONE);
+                recyclerView5.setVisibility(View.VISIBLE);
+                recyclerView6.setVisibility(View.VISIBLE);
+                recyclerView61.setVisibility(View.VISIBLE);
+
+                nomCinema.setVisibility(View.GONE);
+                nomCinema2.setVisibility(View.GONE);
+                nomCinema21.setVisibility(View.GONE);
+                nomCinema3.setVisibility(View.GONE);
+                nomCinema4.setVisibility(View.GONE);
+                nomCinema41.setVisibility(View.GONE);
+                nomCinema5.setVisibility(View.VISIBLE);
+                nomCinema6.setVisibility(View.VISIBLE);
+                nomCinema61.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
+
+        //ViewCompat A METTRE ici
 }

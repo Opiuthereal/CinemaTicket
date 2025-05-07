@@ -1,5 +1,8 @@
 package com.example.recyclerviewdemo;
 
+import static com.example.recyclerviewdemo.DataMainActivity.addFilm;
+import static com.example.recyclerviewdemo.DataMainActivity.nomVid;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,12 +23,14 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.recyclerviewdemo.DataMainActivity;
 
 public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.OnItemClickListener {
 
@@ -34,11 +40,47 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_film_detail);
 
-        //controles de vidéo - code base
+        // Récupération du titre et de l'image de film
+        Intent intent = getIntent();
+        String titre = intent.getStringExtra("titreModifié");
+        String nomCine = intent.getStringExtra("idCinema");
+        TextView titreTextView = findViewById(R.id.titre);
+        ImageView imageView = findViewById(R.id.ImageFilmAvantVideo);
+        TextView duree = findViewById(R.id.dureeFilm);
+        TextView note = findViewById(R.id.noteFilm);
+        TextView genre = findViewById(R.id.genreFilm);
+        TextView date = findViewById(R.id.dateSortieFilmBdd);
+        TextView auteur = findViewById(R.id.auteurs);
+        TextView acteur = findViewById(R.id.acteurs);
+        TextView resume = findViewById(R.id.resumeFilm);
+        TextView videoNom = findViewById(R.id.nomVideo);
         VideoView videoView = findViewById(R.id.videoViewBandeAnnonce);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.monte_cristovideo;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
+
+        nomVid(titre, videoNom); // met à jour le TextView
+
+
+        resume.post(() -> {
+            String videoName = videoNom.getText().toString();
+            int videoResId = getResources().getIdentifier(videoName, "raw", getPackageName());
+
+            if (videoResId != 0) {
+                String videoPath = "android.resource://" + getPackageName() + "/" + videoResId;
+                Uri uri = Uri.parse(videoPath);
+                videoView.setVideoURI(uri);
+
+                // Optionnel : ajouter des contrôles
+                MediaController mediaController = new MediaController(videoView.getContext());
+                mediaController.setAnchorView(videoView);
+                videoView.setMediaController(mediaController);
+
+                videoView.start();
+            } else {
+                Log.e("Vidéo", "Ressource RAW non trouvée pour : " + videoName);
+            }
+        });
+
+
+        addFilm(duree, note, genre, date, auteur, acteur, resume, titre);
 
 
         MediaController mediaController = new MediaController(this);
@@ -104,14 +146,6 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
             }
         });
 
-
-        TextView titreTextView = findViewById(R.id.titre);
-        ImageView imageView = findViewById(R.id.ImageFilmAvantVideo);
-
-
-        // Récupération du titre et de l'image de film
-        Intent intent = getIntent();
-        String titre = intent.getStringExtra("titreModifié");
         int imageResId = intent.getIntExtra("imageResId", -1);
 
         // Vérifie que ce n'est pas null
@@ -130,24 +164,7 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
         }
 
 
-        //ici la partie recyclerView pour les horaires de film
-        RecyclerView recyclerViewHoraire = findViewById(R.id.recyclerViewHoraire);
-
-        List<ItemHoraire> itemsHoraires = new ArrayList<>();
-        itemsHoraires.add(new ItemHoraire("14/05","12:00", "VOST"));
-        itemsHoraires.add(new ItemHoraire("15/05","14:00", "VF"));
-        itemsHoraires.add(new ItemHoraire("16/05","15:30", "VO"));
-        itemsHoraires.add(new ItemHoraire("17/05","17:00", "VF"));
-        itemsHoraires.add(new ItemHoraire("18/05","19:45", "VF"));
-
-        // Configuration du RecyclerView
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewHoraire.setLayoutManager(layoutManager);
-
-        // Créer l'adapter avec le listener et définir l'adapter pour le RecyclerView
-        MyAdapterHoraire adapter = new MyAdapterHoraire(this, itemsHoraires, this);
-
-        recyclerViewHoraire.setAdapter(adapter);
+        setupRecyclerViewHoraire(R.id.recyclerViewHoraire, nomCine, titre);
 
         // Fragment de réservation de tickets
         FragmentTicketReservation fragment = new FragmentTicketReservation();
@@ -155,7 +172,38 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
                 .beginTransaction()
                 .replace(R.id.fragmentTicketReservation, fragment)
                 .commit();
+
+        //je lance mon fragment plus haut et sharedPreferences pour lui attribuer les bonnes infos
+        SharedPreferences sharedPreferences = getSharedPreferences("FilmInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString("titre", intent.getStringExtra("titreModifié"));
+        editor.putString("jour", intent.getStringExtra("jour"));
+        editor.putString("heure", intent.getStringExtra("heure"));
+        editor.putString("version", intent.getStringExtra("version"));
+        editor.putString("idCinema", intent.getStringExtra("idCinema"));
+        editor.putString("duree", intent.getStringExtra("duree"));
+        editor.putInt("imageResId", intent.getIntExtra("imageResId", -1));
+        editor.apply(); // ou commit()
+
     }
+
+    private void setupRecyclerViewHoraire(int recyclerViewId, String nomCine, String titre) {
+        RecyclerView recyclerView = findViewById(recyclerViewId);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        // Appel Firestore asynchrone
+        DataMainActivity.addHoraire(this, nomCine, titre, horaires -> {
+            MyAdapterHoraire adapter = new MyAdapterHoraire(this, horaires, this);
+            recyclerView.setAdapter(adapter);
+
+            if (horaires.isEmpty()) {
+                Toast.makeText(this, "Aucun horaire disponible", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
     // Fonction déclenchée lorsqu’un horaire est cliqué
     public void onItemClick(ItemHoraire itemHoraire) {
@@ -193,6 +241,3 @@ public class FilmDetail extends AppCompatActivity implements MyAdapterHoraire.On
     //ViewCompat A METTRE ici avec id = Main2
 
 }
-
-
-

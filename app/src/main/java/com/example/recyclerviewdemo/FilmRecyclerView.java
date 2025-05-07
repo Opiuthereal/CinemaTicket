@@ -12,11 +12,13 @@ public class FilmRecyclerView {
     String vost2;
     String vost3;
     String vost4;
+
+    String nomCinoche;
     int imageResId;
 
     int ageRequis;
 
-    public FilmRecyclerView(String titre, String horaire1, String horaire2, String horaire3, String horaire4, String vost1, String vost2, String vost3, String vost4, int imageResId, int ageRequis) {
+    public FilmRecyclerView(String titre, String horaire1, String horaire2, String horaire3, String horaire4, String vost1, String vost2, String vost3, String vost4,String nomCinoche, int imageResId, int ageRequis) {
         this.titre = titre;
         this.horaire1 = horaire1;
         this.horaire2 = horaire2;
@@ -26,6 +28,7 @@ public class FilmRecyclerView {
         this.vost2 = vost2;
         this.vost3 = vost3;
         this.vost4 = vost4;
+        this.nomCinoche = nomCinoche;
         this.imageResId = imageResId;
         this.ageRequis = ageRequis;
     }
@@ -65,6 +68,8 @@ public class FilmRecyclerView {
     public String getVost4() {
         return vost4;
     }
+
+    public String getNomCinoche() { return nomCinoche; }
 
     public int getImageResId() {
         return imageResId;

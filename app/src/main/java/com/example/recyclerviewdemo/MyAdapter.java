@@ -48,12 +48,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.vost2.setText(currentFilm.getVost2());
         holder.vost3.setText(currentFilm.getVost3());
         holder.vost4.setText(currentFilm.getVost4());
+        holder.nomCinoche.setText(currentFilm.getVost4());
 
         holder.imageView.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, FilmDetail.class);
             intent.putExtra("titreModifié", currentFilm.getTitre());
             intent.putExtra("imageResId", currentFilm.getImageResId());
+            intent.putExtra("idCinema", currentFilm.getNomCinoche());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });

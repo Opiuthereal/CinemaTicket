@@ -124,6 +124,24 @@ public class ReservationPlaces extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("reservation", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
+                int nombre_sieges_verts = getIntent().getIntExtra("nombre_sieges_verts", 0);
+                String positionsSieges = getIntent().getStringExtra("positions_sieges_verts");
+                String titre = getIntent().getStringExtra("titre");
+                String jour = getIntent().getStringExtra("jour");
+                String heure = getIntent().getStringExtra("heure");
+                String version = getIntent().getStringExtra("version");
+                String cinema = getIntent().getStringExtra("idCinema");
+
+                /*
+                // Récupération des données depuis SharedPreferences
+                String titre = sharedPreferences.getString("titre", "Titre inconnu");
+                String jour = sharedPreferences.getString("jour", "Jour inconnu");
+                String heure = sharedPreferences.getString("heure", "Heure inconnue");
+                String version = sharedPreferences.getString("version", "Version inconnue");
+                String cinema = sharedPreferences.getString("idCinema", "Nom Cinéma");
+
+                 */
+
                 ArrayList<Integer> siegesVerts = new ArrayList<>();
 
                 for (int i = 0; i < siegeImages.length; i++) {
@@ -150,11 +168,23 @@ public class ReservationPlaces extends AppCompatActivity {
                     }
                 }
                 editor.putString("positions_sieges_verts", positions.toString());
+                editor.putString("titre", titre);
+                editor.putString("jour", jour);
+                editor.putString("heure", heure);
+                editor.putString("version", version);
+                editor.putString("idCinema", cinema);
 
                 editor.apply();
 
                 // Lancer l'activité suivante
                 Intent intent = new Intent(ReservationPlaces.this, ActivityTarif.class);
+                intent.putExtra("positions_sieges_verts", positions.toString());
+                intent.putExtra("nombre_sieges_verts", siegesVerts.size());
+                intent.putExtra("titre", titre);
+                intent.putExtra("jour", jour);
+                intent.putExtra("heure", heure);
+                intent.putExtra("version", version);
+                intent.putExtra("idCinema", cinema);
                 startActivity(intent);
             }
         });

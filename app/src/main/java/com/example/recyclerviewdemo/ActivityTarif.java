@@ -37,6 +37,15 @@ public class ActivityTarif extends AppCompatActivity {
         TextView quantitetarifNormal = findViewById(R.id.quantiteNormal);
         TextView quantitetarifSenior = findViewById(R.id.quantiteSenior);
 
+        /*
+        //ici on convertit les quantités pour les multiplier par les prix des tickets
+        int valeurquantitetarifEnfant = Integer.parseInt(quantitetarifEnfant.getText().toString());
+        int valeurquantitetarifEtudiant = Integer.parseInt(quantitetarifEtudiant.getText().toString());
+        int valeurquantitetarifNormal = Integer.parseInt(quantitetarifNormal.getText().toString());
+        int valeurquantitetarifSenior = Integer.parseInt(quantitetarifSenior.getText().toString());
+
+         */
+
 
 
         //les images + et - de chaque tarifs
@@ -199,10 +208,36 @@ public class ActivityTarif extends AppCompatActivity {
             tarifRestant.setText(String.valueOf(tarifRestantActuel));
         });
 
+        //-------------------------------------------------------------------------------------------------------
+
+
+        // Obtenir l'objet SharedPreferences (mode privé)
+        SharedPreferences sharedPreferencesTarifs = getSharedPreferences("tarifsQuantites", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferencesTarifs.edit();
+
+
+        //-------------------------------------------------------------------------------------------------------
 
         // Récupération des données depuis SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("reservation", MODE_PRIVATE);
         int nombreSiegesVerts = sharedPreferences.getInt("nombre_sieges_verts", 0);
+        String positionsSieges = getIntent().getStringExtra("positions_sieges_verts");
+        String titre = getIntent().getStringExtra("titre");
+        String jour = getIntent().getStringExtra("jour");
+        String heure = getIntent().getStringExtra("heure");
+        String version = getIntent().getStringExtra("version");
+        String cinema = getIntent().getStringExtra("idCinema");
+
+        // Récupération des données depuis SharedPreferences
+        /*
+        String titre = sharedPreferences.getString("titre", "Titre inconnu");
+        String jour = sharedPreferences.getString("jour", "Jour inconnu");
+        String heure = sharedPreferences.getString("heure", "Heure inconnue");
+        String version = sharedPreferences.getString("version", "Version inconnue");
+        String cinema = sharedPreferences.getString("idCinema", "Nom Cinéma");
+
+         */
+
 
         // Récupération du TextView
         TextView tarifsRestantsValue = findViewById(R.id.tarifsRestantsValue);
@@ -217,21 +252,78 @@ public class ActivityTarif extends AppCompatActivity {
         boutonValidationTarifs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Récupère la valeur du tarif restant
-                int tarifRestantActuel = Integer.parseInt(tarifRestant.getText().toString());
+                try {
+                    // Récupère la valeur du tarif restant
+                    int tarifRestantActuel = Integer.parseInt(tarifRestant.getText().toString());
 
-                // Vérifier si le tarif restant est 0
-                if (tarifRestantActuel == 0) {
-                    // Lancer la prochaine activité si le tarif restant est 0
-                    Intent intent = new Intent(ActivityTarif.this, InfosPersonnelles.class);
-                    startActivity(intent);
-                } else {
-                    // Afficher un message seulement si le tarif restant n'est pas respecté
-                    Toast.makeText(ActivityTarif.this, "Veuillez sélectionner tous les tarifs avant de valider.", Toast.LENGTH_SHORT).show();
+                    if (tarifRestantActuel == 0) {
+                        // ----------------------- DEBUT : Ton code déplacé ici -----------------------
+
+                        TextView prixtarifEnfant = findViewById(R.id.tarifEnfantValeur);
+                        TextView prixtarifEtudiant = findViewById(R.id.tarifEtudiantValeur);
+                        TextView prixtarifNormal = findViewById(R.id.tarifNormalValeur);
+                        TextView prixtarifSenior = findViewById(R.id.tarifSeniorValeur);
+
+                        int valeurprixtarifEnfant = Integer.parseInt(prixtarifEnfant.getText().toString());
+                        int valeurprixtarifEtudiant = Integer.parseInt(prixtarifEtudiant.getText().toString());
+                        int valeurprixtarifNormal = Integer.parseInt(prixtarifNormal.getText().toString());
+                        int valeurprixtarifSenior = Integer.parseInt(prixtarifSenior.getText().toString());
+
+
+                        int tarifEnfantQuantite = Integer.parseInt(quantitetarifEnfant.getText().toString());
+                        int tarifEtudiantQuantite = Integer.parseInt(quantitetarifEtudiant.getText().toString());
+                        int tarifNormalQuantite = Integer.parseInt(quantitetarifNormal.getText().toString());
+                        int tarifSeniorQuantite = Integer.parseInt(quantitetarifSenior.getText().toString());
+
+                        int totalAPayer = (tarifEnfantQuantite * valeurprixtarifEnfant) +
+                                (tarifEtudiantQuantite * valeurprixtarifEtudiant) +
+                                (tarifNormalQuantite * valeurprixtarifNormal) +
+                                (tarifSeniorQuantite * valeurprixtarifSenior);
+
+
+                        editor.putInt("prixEnfant", valeurprixtarifEnfant);
+                        editor.putInt("prixEtudiant", valeurprixtarifEtudiant);
+                        editor.putInt("prixNormal", valeurprixtarifNormal);
+                        editor.putInt("prixSenior", valeurprixtarifSenior);
+
+                        editor.putInt("quantiteEnfant", tarifEnfantQuantite);
+                        editor.putInt("quantiteEtudiant", tarifEtudiantQuantite);
+                        editor.putInt("quantiteNormal", tarifNormalQuantite);
+                        editor.putInt("quantiteSenior", tarifSeniorQuantite);
+
+                        editor.putString("position_sieges_verts", positionsSieges);
+                        editor.putString("titre", titre);
+                        editor.putString("jour", jour);
+                        editor.putString("heure", heure);
+                        editor.putString("version", version);
+                        editor.putString("idCinema", cinema);
+                        editor.putInt("totalAPayer", totalAPayer);
+                        editor.putInt("nombre_sieges_verts", nombreSiegesVerts);
+                        editor.apply();
+
+
+                        // Intent vers l'activité suivante
+                        Intent intent = new Intent(ActivityTarif.this, InfosPersonnelles.class);
+                        intent.putExtra("nombreSiegesVerts", nombreSiegesVerts);
+                        intent.putExtra("totalAPayer", totalAPayer);
+                        intent.putExtra("positions_sieges_verts", positionsSieges);
+                        intent.putExtra("titre", titre);
+                        intent.putExtra("jour", jour);
+                        intent.putExtra("heure", heure);
+                        intent.putExtra("version", version);
+                        intent.putExtra("idCinema", cinema);
+                        startActivity(intent);
+
+
+                        // ----------------------- FIN : Ton code déplacé ici -----------------------
+                    } else {
+                        Toast.makeText(ActivityTarif.this, "Veuillez sélectionner tous les tarifs avant de valider.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(ActivityTarif.this, "Erreur : veuillez vérifier les champs", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
 
 
     }

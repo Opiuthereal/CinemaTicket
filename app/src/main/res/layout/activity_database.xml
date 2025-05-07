@@ -1,0 +1,210 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/Main2">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- AJOUT ACTEUR -->
+        <EditText
+            android:id="@+id/editPrenomActeur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prénom" />
+
+        <EditText
+            android:id="@+id/editNomActeur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom" />
+
+        <Button
+            android:id="@+id/buttonAjouterActeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Acteur" />
+
+
+
+        <!--AJOUT AUTEUR-->
+        <EditText
+            android:id="@+id/editPrenomAuteur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prénom" />
+
+        <EditText
+            android:id="@+id/editNomAuteur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom" />
+
+        <Button
+            android:id="@+id/buttonAjouterAuteur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Auteur" />
+
+
+
+        <!-- AJOUT FILM -->
+        <EditText
+            android:id="@+id/editTitre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Titre" />
+
+        <EditText
+            android:id="@+id/editDateSortie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date de sortie" />
+
+        <EditText
+            android:id="@+id/editDuree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Durée" />
+
+        <EditText
+            android:id="@+id/editImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Image" />
+
+        <EditText
+            android:id="@+id/editResume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Resume" />
+
+        <EditText
+            android:id="@+id/editNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Note" />
+
+        <Button
+            android:id="@+id/buttonAjouterFilm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Film" />
+
+
+
+        <!--AJOUT AUTEUR-->
+        <EditText
+            android:id="@+id/editNomGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom du genre" />
+
+        <Button
+            android:id="@+id/buttonAjouterGenre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Genre" />
+
+
+
+        <!-- AJOUT Cinema -->
+        <EditText
+            android:id="@+id/editCine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom" />
+
+        <EditText
+            android:id="@+id/editNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numéro de rue" />
+
+        <EditText
+            android:id="@+id/editRue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rue" />
+
+        <EditText
+            android:id="@+id/editVille"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ville" />
+
+        <Button
+            android:id="@+id/buttonAjouterCine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Cinema" />
+
+        <!--AJOUT SALLE ET SIEGES-->
+        <EditText
+            android:id="@+id/editIdCine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Id Cinema" />
+
+        <EditText
+            android:id="@+id/editNumSalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numero de la salle" />
+
+        <EditText
+            android:id="@+id/editTypeDiffusion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type de Diffusion" />
+
+        <EditText
+            android:id="@+id/editX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Abcisse à ignorer" />
+
+        <EditText
+            android:id="@+id/editY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ordonne à ignorer " />
+
+        <Button
+            android:id="@+id/buttonAjouterSalle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter Salle" />
+
+        <!--AJOUT REF DES FILMS DANS DIFFUSION-->
+        <EditText
+            android:id="@+id/editIDCine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Id Cinema" />
+
+        <EditText
+            android:id="@+id/editnumDiff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Numero de la diffusion" />
+
+        <EditText
+            android:id="@+id/editidFilm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Chemin du film" />
+
+        <Button
+            android:id="@+id/buttonAjouterFilmDiff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouter chemin du Film" />
+
+
+    </LinearLayout>
+</ScrollView>
+
