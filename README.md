@@ -140,5 +140,5 @@ To host our database, we used https://firebase.google.com/. Here's the structure
   - "Salle": references each cinema room, composed of a screening type (4K, IMAX, etc.) and seats "Siege" positioned by x/y coordinates on a 12x15 grid
   - "Diffusion": references all screenings at the cinema, including the film (link to "Film"), the room (link to "Salle"), and the date and time the film is shown
  
-  🎬 [Voir la vidéo de démonstration](https://github.com/Codastic25/CinemaTicket/raw/main/WhatsApp%20Video%202025-05-12%20at%2022.54.12.mp4)
+  🎬 [see the demo of the video (it will download it](https://github.com/Codastic25/CinemaTicket/raw/main/WhatsApp%20Video%202025-05-12%20at%2022.54.12.mp4)
 
