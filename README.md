@@ -38,6 +38,8 @@ Made in 2 weeks during the class period
 ### `LandingPage.java` and `activity_landing_page.xml`  
 This is the very first screen that only shows once (while the app is loading). It features our logo, used as a loading icon for 3 seconds. After that, it automatically navigates to the now-showing films page: `MainActivity.java`.
 
+![Image](https://github.com/user-attachments/assets/5cd58f6d-4481-41d8-b5ea-2e41478b8d4f)
+
 ### `MainActivity.java`, `activity_main.xml`, and `item_spinner.xml`  
 The landing page when the app starts. A spinner handles the main categories of cinemas. Different now-showing films for each cinema (displayed horizontally scrollable) appear.
 
