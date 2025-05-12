@@ -86,7 +86,7 @@ Here users can select ticket prices (vary by cinema). The number of prices selec
 ### `InfosPersonnelles.java` and `activity_infos_personnelles.xml`  
 Users enter their information (name, surname, email), which is stored before proceeding to: `TicketResumeAll.java`.
 
-![Image](https://github.com/user-attachments/assets/735a95c6-1a94-4fef-b1f5-e23bf52c3d27)
+![Image](https://github.com/user-attachments/assets/fa7a1551-f724-46ff-838e-1cac0e70abdc)
 
 ### `TicketResumeAll.java` and `activity_ticket_resume_all.xml`  
 This page displays all ticket details from film choice to final confirmation. It also includes a QR Code to retrieve the ticket info. The user can then validate to go to the last page: `Remerciements.java`.
