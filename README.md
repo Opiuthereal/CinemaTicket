@@ -41,6 +41,8 @@ This is the very first screen that only shows once (while the app is loading). I
 ### `MainActivity.java`, `activity_main.xml`, and `item_spinner.xml`  
 The landing page when the app starts. A spinner handles the main categories of cinemas. Different now-showing films for each cinema (displayed horizontally scrollable) appear.
 
+![Image](https://github.com/user-attachments/assets/44d8d2a7-b0a3-44db-b5c7-72259bd1ffd6)
+
 ### `MyAdapter.java` and `item_view.xml`  
 These files build the now-showing films visible on the main page via `MyViewHolder.java`. It reuses data from `MyViewHolder.java` to populate the RecyclerView. When a film poster is clicked, it passes information (image, title, idCinema) to the next page: `FilmDetail.java`.
 
