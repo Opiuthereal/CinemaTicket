@@ -71,6 +71,8 @@ This Java class and XML build the film's showtimes displayed on the film detail 
 ### `ReservationPlaces.java` and `activity_reservation_places.xml`  
 This page uses a GridView along with functions from `DataMainActivity.java`. Users can select one or more seats and then confirm to go to the next page: `ActivityTarif.java`.
 
+![Image](https://github.com/user-attachments/assets/a9f27883-fce4-4d80-9673-b48b932b851e)
+
 ### `GridAdapter.java` and `grid_items.xml`  
 Initializes the seat selection GridView data and provides methods to retrieve and manage the grid.
 
