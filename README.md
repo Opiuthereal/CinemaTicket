@@ -79,6 +79,8 @@ Initializes the seat selection GridView data and provides methods to retrieve an
 ### `ActivityTarif.java` and `activity_tarif.xml`  
 Here users can select ticket prices (vary by cinema). The number of prices selected must match the number of seats. After that, the app navigates to: `InfosPersonnelles.java`.
 
+![Image](https://github.com/user-attachments/assets/7d838643-c101-45f3-8922-8f145fbefc0d)
+
 ### `InfosPersonnelles.java` and `activity_infos_personnelles.xml`  
 Users enter their information (name, surname, email), which is stored before proceeding to: `TicketResumeAll.java`.
 
