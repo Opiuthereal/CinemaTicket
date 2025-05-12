@@ -85,6 +85,8 @@ Users enter their information (name, surname, email), which is stored before pro
 ### `TicketResumeAll.java` and `activity_ticket_resume_all.xml`  
 This page displays all ticket details from film choice to final confirmation. It also includes a QR Code to retrieve the ticket info. The user can then validate to go to the last page: `Remerciements.java`.
 
+![Image](https://github.com/user-attachments/assets/d90a4647-2775-4d96-b766-2265b38aeb4f)
+
 ### `Remerciements.java` and `activity_remerciements.xml`  
 This final page displays a thank-you message from the cinema and offers a return button to go back to the now-showing films page (`MainActivity.java`).
 
