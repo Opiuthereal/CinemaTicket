@@ -90,6 +90,8 @@ This page displays all ticket details from film choice to final confirmation. It
 ### `Remerciements.java` and `activity_remerciements.xml`  
 This final page displays a thank-you message from the cinema and offers a return button to go back to the now-showing films page (`MainActivity.java`).
 
+![Image](https://github.com/user-attachments/assets/0e4eb4c6-e741-429e-83ca-539653e83921)
+
 ### `DatabaseActivity.java` and `activity_database.xml`  
 This is an activity not present in the production version. It was used for development purposes to manually populate the database. It can be accessed by uncommenting a line in the `onCreate` method of `MainActivity.java`.
 
