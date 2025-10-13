@@ -1,7 +1,7 @@
 
 # README Project Cinema Ticket Selling - Android Studio
 
-By Opiuthereal and Codastic25  
+By Opiuthereal (https://github.com/Opiuthereal) and Codastic25  
 Big thanks to our teacher Qiong liu (https://github.com/evesiphus)  
 Made in 2 weeks during the class period  
 
