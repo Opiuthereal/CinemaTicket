@@ -1,3 +1,4 @@
+# Android Studio / IntelliJ
 *.iml
 .gradle
 /local.properties
@@ -8,8 +9,27 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+
+# Build artifacts
 /build
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+*.apk
+*.aab
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+
+# Secrets / config
+gradle.properties
+secrets.properties
+api_keys.properties
+.env
+
+# Keystores / certificates
+*.jks
+*.keystore
+*.pem
+*.key
