@@ -1,5 +1,6 @@
 
 # README Project Cinema Ticket Selling - Android Studio
+Warning: The project can no longer be tested because the database has been shut down to avoid unnecessary resource usage.
 
 By Opiuthereal and Codastic25 (https://github.com/Codastic25) 
 Big thanks to our teacher Qiong liu (https://github.com/evesiphus)  
